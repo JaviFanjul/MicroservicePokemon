@@ -1,0 +1,9 @@
+java_binary(
+    name = "main",
+    srcs = glob(["**/*.java"]),
+    main_class = "main.Main",
+    deps = [
+        "@maven//:io_vertx_vertx_core_4_5_15",
+        "@maven//:io_vertx_vertx_web_4_5_15",
+    ],
+    )
