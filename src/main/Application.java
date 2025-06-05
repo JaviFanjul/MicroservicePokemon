@@ -2,6 +2,7 @@ package main;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
+import main.model.Pokemon;
 
 public class Application extends AbstractVerticle {
 
@@ -20,6 +21,7 @@ public class Application extends AbstractVerticle {
                         System.err.println("Error al iniciar el servidor: " + result.cause());
                     }
                 });
+
     }
 
     public static void main(String[] args) {

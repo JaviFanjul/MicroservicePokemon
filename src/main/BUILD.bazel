@@ -1,9 +1,10 @@
 java_binary(
     name = "app",
-    srcs = glob(["**/*.java"]),
+    srcs = ["Application.java"],
     main_class = "main.Application",
     deps = [
         "@maven//:io_vertx_vertx_core_4_5_15",
         "@maven//:io_vertx_vertx_web_4_5_15",
+        "//src/main/model:pokemodel",
     ],
     )
