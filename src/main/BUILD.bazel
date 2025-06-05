@@ -5,6 +5,8 @@ java_binary(
     deps = [
         "@maven//:io_vertx_vertx_core_4_5_15",
         "@maven//:io_vertx_vertx_web_4_5_15",
+        "@maven//:io_vertx_vertx_web_client_4_5_15",
+
         "//src/main/model:pokemodel",
     ],
     )
