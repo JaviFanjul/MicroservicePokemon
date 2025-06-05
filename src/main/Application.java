@@ -2,31 +2,23 @@ package main;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
+import main.api.PokemonApiClient;
 import main.model.Pokemon;
 
 public class Application extends AbstractVerticle {
 
-    @Override
-    public void start() {
-        // Crear un servidor HTTP en el puerto 8080
-        vertx.createHttpServer()
-                .requestHandler(req -> {
-                    // Responder con "Hello, World!"
-                    req.response().end("Hello, World!");
-                })
-                .listen(8080, result -> {
-                    if (result.succeeded()) {
-                        System.out.println("Servidor iniciado en el puerto 8080");
-                    } else {
-                        System.err.println("Error al iniciar el servidor: " + result.cause());
-                    }
-                });
-
-    }
 
     public static void main(String[] args) {
-        // Crear un Vertx instance y desplegar el verticle
-        Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new Application());
+        PokemonApiClient client = new PokemonApiClient();
+        // Llamamos al método y obtenemos el resultado asíncrono
+        client.getPokemonData("pikachu").onComplete(ar -> {
+            if (ar.succeeded()) {
+                // Si todo fue bien, mostramos el JSON
+                System.out.println("Pokémon data: " + ar.result().toString(4));  // Imprime el JSON de forma legible
+            } else {
+                // Si hubo un error, lo mostramos
+                System.out.println("Error fetching Pokémon data: " + ar.cause().getMessage());
+            }
+        });
     }
 }

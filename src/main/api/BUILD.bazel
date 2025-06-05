@@ -10,18 +10,3 @@ java_library(
         "@maven//:io_vertx_vertx_web_client_4_5_15",
         "@maven//:org_json_json_20250517",
     ],)
-
-java_binary(
-    name = "PokemonApiClient",
-    srcs = ["PokemonApiClient.java","PokemonApiClientInterface.java"],
-    main_class = "main.api.PokemonApiClient",
-    deps = [
-        "//src/main/model:pokemodel",
-        "@maven//:io_vertx_vertx_core_4_5_15",
-        "@maven//:io_vertx_vertx_web_4_5_15",
-        "@maven//:io_vertx_vertx_web_client_4_5_15",
-        "@maven//:org_json_json_20250517",]
-
-
-
-)

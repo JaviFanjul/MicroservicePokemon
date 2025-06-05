@@ -8,5 +8,6 @@ java_binary(
         "@maven//:io_vertx_vertx_web_client_4_5_15",
 
         "//src/main/model:pokemodel",
+        "//src/main/api:pokeapi",
     ],
     )
