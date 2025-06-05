@@ -3,7 +3,7 @@ package main;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
 
-public class Main extends AbstractVerticle {
+public class Application extends AbstractVerticle {
 
     @Override
     public void start() {
@@ -25,6 +25,6 @@ public class Main extends AbstractVerticle {
     public static void main(String[] args) {
         // Crear un Vertx instance y desplegar el verticle
         Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new Main());
+        vertx.deployVerticle(new Application());
     }
 }

@@ -1,7 +1,7 @@
 java_binary(
-    name = "main",
+    name = "app",
     srcs = glob(["**/*.java"]),
-    main_class = "main.Main",
+    main_class = "main.Application",
     deps = [
         "@maven//:io_vertx_vertx_core_4_5_15",
         "@maven//:io_vertx_vertx_web_4_5_15",
