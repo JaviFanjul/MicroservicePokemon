@@ -1,0 +1,10 @@
+#java_library(
+#    name = "repository",
+#    srcs = ["PokemonRepository.java",
+#            "PokemonRepositoryInterface.java",
+#            "PostgresClientProvider.java"],
+#    deps = [
+#        "@postgresql//jar",
+#        "//src/main/model:pokemodel",
+#    ],
+#)

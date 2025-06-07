@@ -3,12 +3,13 @@
 
 CREATE TABLE IF NOT EXISTS pokemon (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    nPokedex INTEGER NOT NULL,
-    weakAgainst TEXT[] NOT NULL,
+    name TEXT NOT NULL,
+    npokedex INTEGER NOT NULL,
+    types TEXT[] NOT NULL,
+    weakagainst TEXT[] NOT NULL,
     speed INTEGER NOT NULL,
-    attack INTEGER NOT NULL,
-    defense INTEGER NOT NULL
+    attack INTEGER[] NOT NULL,
+    defense INTEGER[] NOT NULL
 );
 
 -- Ejecutar una vez instalado postgres
