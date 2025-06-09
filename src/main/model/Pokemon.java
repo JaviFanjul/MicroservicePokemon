@@ -20,6 +20,8 @@ public class Pokemon {
 
     private String[] types;
 
+    private String[] abilities;
+
     private String[] weakAgainst;
 
     public Pokemon() {
@@ -55,6 +57,16 @@ public class Pokemon {
         }
 
         this.types = typesArray;
+
+        //Get habilities
+        JSONArray abilitiesJson = pokeData.getJSONArray("abilities");
+        String[] abilitiesArray = new String[abilitiesJson.length()];
+        for (int i = 0; i < abilitiesJson.length(); i++) {
+            abilitiesArray[i] = abilitiesJson.getString(i);
+        }
+
+        this.abilities = abilitiesArray;
+
 
         this.weakAgainst = null;
     }
@@ -100,6 +112,17 @@ public class Pokemon {
             }
         }
         json.put("weak_against", weakArray);
+
+        // Habilidades
+        JSONArray abilitiesArray = new JSONArray();
+        if (this.abilities != null) {
+            for (String a : this.abilities) {
+                abilitiesArray.put(a);
+            }
+        }
+        json.put("abilities", abilitiesArray);
+
+
 
         return json;
     }

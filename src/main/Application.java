@@ -13,7 +13,7 @@ public class Application extends AbstractVerticle {
         PokemonApiClient client = new PokemonApiClient();
         PokemonService service = new PokemonService();
         // Llamamos al método y obtenemos el resultado asíncrono
-        client.getPokemonData("charizard").onComplete(ar -> {
+        client.getPokemonData("arceus").onComplete(ar -> {
             if (ar.succeeded()) {
                 Pokemon p = new Pokemon(ar.result());
                 p.setWeak(service.getWeakTypes(p));

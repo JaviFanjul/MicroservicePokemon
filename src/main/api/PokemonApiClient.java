@@ -69,6 +69,17 @@ public class PokemonApiClient implements PokemonApiClientInterface {
 
         modifiedJson.put("types", typesJson);
 
+        JSONArray abilitiesJson = new JSONArray();
+        JSONArray abilities = data.getJSONArray("abilities");
+        for (int i = 0; i < abilities.length(); i++) {
+            String abilitieName = abilities.getJSONObject(i).getJSONObject("ability").getString("name");
+            abilitiesJson.put(abilitieName);
+        }
+
+        modifiedJson.put("abilities", abilitiesJson);
+
+
+
         return modifiedJson;
     }
 
