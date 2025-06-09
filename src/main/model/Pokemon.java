@@ -58,8 +58,8 @@ public class Pokemon {
 
         this.weakAgainst = null;
     }
-    void setWeak(String[] weakTypes){
-
+    public void setWeak(String[] weakTypes){
+            this.weakAgainst = weakTypes;
     }
 
     public JSONObject getData(){
@@ -106,5 +106,6 @@ public class Pokemon {
     public String[] getTypes(){
         return this.types;
     }
+
 
 }//Pokemon class

@@ -4,6 +4,8 @@ import main.model.Pokemon;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -23,7 +25,11 @@ public class PokemonService implements PokemonServiceInterface {
 
     private JSONObject loadTypeChart() {
         try {
-            String json = Files.readString(Paths.get("src/resources/tableType.json"));
+            InputStream is = getClass().getClassLoader().getResourceAsStream("resources/tableType.json");
+            if (is == null) {
+                throw new RuntimeException("Resource not found: resource/json/tableType.json");
+            }
+            String json = new String(is.readAllBytes(), StandardCharsets.UTF_8);
             return new JSONObject(json);
         } catch (IOException e) {
             throw new RuntimeException("Error loading type_chart.json", e);

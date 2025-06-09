@@ -1,6 +1,8 @@
 java_binary(
     name = "app",
     srcs = ["Application.java"],
+    resources = ["resources/tableType.json"],
+    resource_strip_prefix = "src/main",
     main_class = "main.Application",
     deps = [
         "@maven//:io_vertx_vertx_core_4_5_15",
