@@ -13,8 +13,8 @@ public class Application extends AbstractVerticle {
         // Llamamos al método y obtenemos el resultado asíncrono
         client.getPokemonData("pikachu").onComplete(ar -> {
             if (ar.succeeded()) {
-                // Si todo fue bien, mostramos el JSON
-                System.out.println("Pokémon data: " + ar.result().toString(4));  // Imprime el JSON de forma legible
+                Pokemon p = new Pokemon(ar.result());
+                System.out.println(p.getData().toString(4));
             } else {
                 // Si hubo un error, lo mostramos
                 System.out.println("Error fetching Pokémon data: " + ar.cause().getMessage());

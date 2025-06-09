@@ -2,5 +2,7 @@ java_library(
     name = "pokemodel",
     srcs = ["Pokemon.java"],
     visibility = ["//src/main:__subpackages__"],
-    )
+    deps = [
+          "@maven//:org_json_json_20250517",
+    ],)
 
