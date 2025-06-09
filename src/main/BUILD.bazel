@@ -9,5 +9,6 @@ java_binary(
 
         "//src/main/model:pokemodel",
         "//src/main/api:pokeapi",
+        "//src/main/service:pokeservice",
     ],
     )

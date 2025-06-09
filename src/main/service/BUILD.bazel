@@ -1,0 +1,12 @@
+java_library(
+    name = "pokeservice",
+    srcs = [
+        "PokemonService.java",
+        "PokemonServiceInterface.java",
+    ],
+    visibility = ["//src/main:__subpackages__"],
+    deps = [
+          "//src/main/model:pokemodel",
+          "@maven//:org_json_json_20250517",
+    ],)
+
