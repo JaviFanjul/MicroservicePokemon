@@ -3,7 +3,7 @@ java_library(
    srcs = ["PokemonRepository.java",
            "PokemonRepositoryInterface.java",
             "PostgresClientProvider.java"],
-   visibility = ["//src/main:__subpackages__"],
+   visibility = ["//src:__subpackages__"],
    deps = [
         "//src/main/model:pokemodel",
         "@maven//:io_vertx_vertx_core_4_5_15",

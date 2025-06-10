@@ -17,7 +17,7 @@ public class Application extends AbstractVerticle {
         PokemonRepository repository = new PokemonRepository();
 
         // Llamamos al método y obtenemos el resultado asíncrono
-        client.getPokemonData("magikarp").onComplete(ar -> {
+        client.getPokemonData("infernape").onComplete(ar -> {
             if (ar.succeeded()) {
                 Pokemon p = new Pokemon(ar.result());
                 p.setWeak(service.getWeakTypes(p));
