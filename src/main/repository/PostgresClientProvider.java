@@ -14,7 +14,7 @@ public class PostgresClientProvider {
                 .setHost("localhost")
                 .setDatabase("pokemon_db")
                 .setUser("postgres")
-                .setPassword("tu_password");
+                .setPassword("postgres");
 
         PoolOptions poolOptions = new PoolOptions().setMaxSize(5);
         return PgPool.pool(vertx, connectOptions, poolOptions);

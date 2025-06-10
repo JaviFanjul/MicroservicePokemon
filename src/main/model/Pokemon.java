@@ -28,6 +28,22 @@ public class Pokemon {
         // Default constructor
     }//Pokemon default constructor
 
+    //Getters
+    public String getName() {return this.name;}
+    public int getNumberPokedex() {return this.numberPokedex;}
+    public int getSpeed() {return this.speed;}
+    public int[] getAttack() {return this.attack;}
+    public int[] getDefense() {return this.defense;}
+    public String[] getAbilities() {return this.abilities;}
+    public String[] getWeakAgainst() {return this.weakAgainst;}
+    public String[] getTypes(){
+        return this.types;
+    }
+
+    //Setters
+    public void setWeak(String[] weakTypes){
+        this.weakAgainst = weakTypes;
+    }
 
     public Pokemon (JSONObject pokeData){
         //Get name
@@ -69,9 +85,6 @@ public class Pokemon {
 
 
         this.weakAgainst = null;
-    }
-    public void setWeak(String[] weakTypes){
-            this.weakAgainst = weakTypes;
     }
 
     public JSONObject getData(){
@@ -125,9 +138,6 @@ public class Pokemon {
 
 
         return json;
-    }
-    public String[] getTypes(){
-        return this.types;
     }
 
 

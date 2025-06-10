@@ -1,10 +1,16 @@
-#java_library(
-#    name = "repository",
-#    srcs = ["PokemonRepository.java",
-#            "PokemonRepositoryInterface.java",
-#            "PostgresClientProvider.java"],
-#    deps = [
-#        "@postgresql//jar",
-#        "//src/main/model:pokemodel",
-#    ],
-#)
+java_library(
+   name = "pokerepository",
+   srcs = ["PokemonRepository.java",
+           "PokemonRepositoryInterface.java",
+            "PostgresClientProvider.java"],
+   visibility = ["//src/main:__subpackages__"],
+   deps = [
+        "//src/main/model:pokemodel",
+        "@maven//:io_vertx_vertx_core_4_5_15",
+        "@maven//:io_vertx_vertx_pg_client_4_5_15",
+        "@maven//:io_vertx_vertx_sql_client_4_5_15",
+        "@maven//:com_ongres_scram_client_2_1",
+
+
+    ],
+)

@@ -1,4 +1,9 @@
 package main.repository;
 
-public interface PokemonRepositoryInterface {
+import main.model.Pokemon;
+import io.vertx.core.Future;
+
+public interface PokemonRepositoryInterface{
+
+    Future<Void> savePokemon(Pokemon p);
 }
