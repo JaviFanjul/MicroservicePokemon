@@ -6,6 +6,7 @@ import main.api.PokemonApiClient;
 import main.model.Pokemon;
 import main.service.PokemonService;
 import main.repository.PokemonRepository;
+import io.vertx.core.Future;
 
 public class Application extends AbstractVerticle {
 
@@ -16,18 +17,19 @@ public class Application extends AbstractVerticle {
         PokemonRepository repository = new PokemonRepository();
 
         // Llamamos al método y obtenemos el resultado asíncrono
-        client.getPokemonData("charizard").onComplete(ar -> {
+        client.getPokemonData("magikarp").onComplete(ar -> {
             if (ar.succeeded()) {
                 Pokemon p = new Pokemon(ar.result());
                 p.setWeak(service.getWeakTypes(p));
-                repository.savePokemon(p).onComplete(saveResult -> {
+                Future<Integer> i = repository.savePokemon(p).onComplete(saveResult -> {
                     if (saveResult.succeeded()) {
+                        p.setId(saveResult.result());
                         System.out.println("Pokémon saved successfully!");
+                        System.out.println(p.getData().toString(4));
                     } else {
                         System.out.println("Error saving Pokémon: " + saveResult.cause().getMessage());
                     }
                 });
-                System.out.println(p.getData().toString(4));
 
 
             } else {

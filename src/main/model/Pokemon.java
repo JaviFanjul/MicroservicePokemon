@@ -44,6 +44,7 @@ public class Pokemon {
     public void setWeak(String[] weakTypes){
         this.weakAgainst = weakTypes;
     }
+    public void setId(int id){this.id = id;}//setId
 
     public Pokemon (JSONObject pokeData){
         //Get name
@@ -85,7 +86,7 @@ public class Pokemon {
 
 
         this.weakAgainst = null;
-    }
+    }//Pokemon constructor with JSONObject
 
     public JSONObject getData(){
         JSONObject json = new JSONObject();
@@ -138,7 +139,6 @@ public class Pokemon {
 
 
         return json;
-    }
-
+    }//getData
 
 }//Pokemon class

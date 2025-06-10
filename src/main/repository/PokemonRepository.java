@@ -6,6 +6,8 @@ import main.model.Pokemon;
 import io.vertx.core.Vertx;
 import io.vertx.core.Promise;
 import io.vertx.sqlclient.Tuple;
+import io.vertx.sqlclient.Row;
+import io.vertx.sqlclient.RowSet;
 
 public class PokemonRepository implements PokemonRepositoryInterface {
 
@@ -15,16 +17,26 @@ public class PokemonRepository implements PokemonRepositoryInterface {
     }
 
     @Override
-    public Future<Void> savePokemon(Pokemon p) {
-        String query = "INSERT INTO pokemon (name, npokedex, weakagainst, speed,attack, defense) VALUES ($1, $2, $3, $4, $5, $6)";
+    public Future<Integer> savePokemon(Pokemon p) {
+        // Añade RETURNING id a la consulta
+        String query = "INSERT INTO pokemon (name, npokedex, weakagainst, speed, attack, defense) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
         Tuple values = Tuple.of(p.getName(), p.getNumberPokedex(), p.getWeakAgainst(), p.getSpeed(), p.getAttack(), p.getDefense());
 
-        Promise<Void> promise = Promise.promise();
+        Promise<Integer> promise = Promise.promise();
 
         client
                 .preparedQuery(query)
                 .execute(values)
-                .onSuccess(res -> promise.complete())
+                .onSuccess(res -> {
+                    RowSet<Row> rows = res;
+                    if (rows.size() > 0) {
+                        Row row = rows.iterator().next();
+                        int id = row.getInteger("id"); // Ahora 'id' estará presente en el Row
+                        promise.complete(id);
+                    } else {
+                        promise.fail("No ID returned from INSERT operation.");
+                    }
+                })
                 .onFailure(promise::fail);
 
         return promise.future();

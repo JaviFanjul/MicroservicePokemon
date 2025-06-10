@@ -5,5 +5,5 @@ import io.vertx.core.Future;
 
 public interface PokemonRepositoryInterface{
 
-    Future<Void> savePokemon(Pokemon p);
+    Future<Integer> savePokemon(Pokemon p);
 }
