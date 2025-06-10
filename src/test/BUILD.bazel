@@ -1,0 +1,22 @@
+
+java_test(
+    name = "poketest",
+    srcs = ["PokeTest.java"],
+    deps = [
+        #Biblotecas del programa
+        "//src/main/api:pokeapi",
+        "//src/main/model:pokemodel",
+        "//src/main/service:pokeservice",
+        "//src/main/repository:pokerepository",
+
+        #Unit testing dependencies
+        "@maven//:junit_junit_4_13_2",
+
+
+    ],
+    test_class = "test.PokeTest",
+
+
+
+
+)
