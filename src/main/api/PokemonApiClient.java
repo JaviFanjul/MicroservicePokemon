@@ -34,7 +34,7 @@ public class PokemonApiClient implements PokemonApiClientInterface {
                         JSONObject json = new JSONObject(body);
                         promise.complete(parseData(json));
                     } else {
-                        promise.fail(ar.cause());
+                        promise.fail("This pokemon does not exist or there was an error fetching the data.");
                     }
                 });
 

@@ -54,7 +54,7 @@ public class PokemonHandler implements PokemonHandlerInterface {
                     context.response()
                             .setStatusCode(500) // Internal Server Error
                             .putHeader("Content-Type", "text/plain")
-                            .end("Error al obtener datos del Pokemon");
+                            .end(apiFailure.getMessage());
                 });
     }
 }
