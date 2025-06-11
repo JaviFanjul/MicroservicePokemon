@@ -1,0 +1,15 @@
+java_library(
+    name = "pokehandler",
+    srcs = ["PokemonHandler.java", "PokemonHandlerInterface.java","PokemonRestVerticle.java"],
+    visibility = ["//src:__subpackages__"],
+    deps = [
+        "@maven//:io_vertx_vertx_core_4_5_15",
+        "@maven//:io_vertx_vertx_web_4_5_15",
+        "@maven//:io_vertx_vertx_web_client_4_5_15",
+        "//src/main/api:pokeapi",
+        "//src/main/model:pokemodel",
+        "//src/main/service:pokeservice",
+        "//src/main/repository:pokerepository",
+        "@maven//:org_json_json_20250517",
+    ],
+)
