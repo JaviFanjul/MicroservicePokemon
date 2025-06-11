@@ -17,7 +17,7 @@ public class PokemonHandler implements PokemonHandlerInterface {
     private final PokemonRepositoryInterface pokemonRepository;
 
     // Constructor para inyectar las dependencias
-    public PokemonHandler(PokemonApiClient pokemonApiClient, PokemonService pokemonService, PokemonRepository pokemonRepository) {
+    public PokemonHandler(PokemonApiClientInterface pokemonApiClient, PokemonServiceInterface pokemonService, PokemonRepositoryInterface pokemonRepository) {
         this.pokemonApiClient = pokemonApiClient;
         this.pokemonService = pokemonService;
         this.pokemonRepository = pokemonRepository;
