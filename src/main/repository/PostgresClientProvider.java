@@ -8,6 +8,7 @@ import io.vertx.sqlclient.SqlClient;
 
 public class PostgresClientProvider {
 
+    // Conection to the SQL Server (locally)
     public static SqlClient createClient(Vertx vertx) {
         PgConnectOptions connectOptions = new PgConnectOptions()
                 .setPort(5432)
@@ -16,7 +17,9 @@ public class PostgresClientProvider {
                 .setUser("postgres")
                 .setPassword("postgres");
 
+        // Pool of size 5 to prevent too many requests
         PoolOptions poolOptions = new PoolOptions().setMaxSize(5);
+
         return PgPool.pool(vertx, connectOptions, poolOptions);
     }
 }

@@ -24,11 +24,9 @@ public class Pokemon {
 
     private String[] weakAgainst;
 
-    public Pokemon() {
-        // Default constructor
-    }//Pokemon default constructor
+    public Pokemon() { } // Pokemon default constructor
 
-    //Getters
+    // Getters
     public String getName() {return this.name;}
     public int getNumberPokedex() {return this.numberPokedex;}
     public int getSpeed() {return this.speed;}
@@ -40,63 +38,60 @@ public class Pokemon {
         return this.types;
     }
 
-    //Setters
+    // Setters
     public void setWeak(String[] weakTypes){
         this.weakAgainst = weakTypes;
     }
     public void setId(int id){this.id = id;}//setId
 
+    // Pokemon constructor through JSON
     public Pokemon (JSONObject pokeData){
-        //Get name
+        // Get name
         this.name = pokeData.getString("name");
 
-        //Get pokedex number
+        // Get pokedex number
         this.numberPokedex = pokeData.getInt("pokedex_number");
 
-        //Get stats
+        // Get stats
         JSONObject stats = pokeData.getJSONObject("stats");
-
         this.speed = stats.getInt("speed");
-
         this.attack = new int[2];
         this.attack[0] = stats.getInt("attack");
         this.attack[1] = stats.getInt("special-attack");
-
         this.defense = new int[2];
         this.defense[0] = stats.getInt("defense");
         this.defense[1] = stats.getInt("special-defense");
 
-        //Get types
+        // Get types
         JSONArray typesJson = pokeData.getJSONArray("types");
         String[] typesArray = new String[typesJson.length()];
         for (int i = 0; i < typesJson.length(); i++) {
             typesArray[i] = typesJson.getString(i);
         }
-
         this.types = typesArray;
 
-        //Get habilities
+        // Get habilities
         JSONArray abilitiesJson = pokeData.getJSONArray("abilities");
         String[] abilitiesArray = new String[abilitiesJson.length()];
         for (int i = 0; i < abilitiesJson.length(); i++) {
             abilitiesArray[i] = abilitiesJson.getString(i);
         }
-
         this.abilities = abilitiesArray;
 
 
         this.weakAgainst = null;
-    }//Pokemon constructor with JSONObject
+    } // Pokemon constructor through JSONObject
+
 
     public JSONObject getData(){
         JSONObject json = new JSONObject();
 
-        // Atributos simples
+        // Simple atributes
         json.put("id", this.id);
         json.put("pokedex_number", this.numberPokedex);
         json.put("name", this.name);
 
-        // Atributos compuestos: ataque y defensa
+        // Compound atributes: attack and defense
         JSONObject stats = new JSONObject();
         if (this.attack != null && this.attack.length >= 2) {
             stats.put("attack", this.attack[0]);
@@ -110,7 +105,7 @@ public class Pokemon {
 
         json.put("stats", stats);
 
-        // Tipos
+        // Types
         JSONArray typesArray = new JSONArray();
         if (this.types != null) {
             for (String t : this.types) {
@@ -119,7 +114,7 @@ public class Pokemon {
         }
         json.put("types", typesArray);
 
-        // Debilidades
+        // Weaknesses
         JSONArray weakArray = new JSONArray();
         if (this.weakAgainst != null) {
             for (String w : this.weakAgainst) {
@@ -128,7 +123,7 @@ public class Pokemon {
         }
         json.put("weak_against", weakArray);
 
-        // Habilidades
+        // Abilities
         JSONArray abilitiesArray = new JSONArray();
         if (this.abilities != null) {
             for (String a : this.abilities) {
@@ -138,8 +133,7 @@ public class Pokemon {
         json.put("abilities", abilitiesArray);
 
 
-
         return json;
-    }//getData
+    } // getData
 
-}//Pokemon class
+} // Pokemon class

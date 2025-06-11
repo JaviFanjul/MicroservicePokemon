@@ -13,7 +13,6 @@ import io.vertx.core.Promise;
 
 public class PokemonApiClient implements PokemonApiClientInterface {
 
-
     private final Vertx vertx;
     private final WebClient client;
 
@@ -22,16 +21,21 @@ public class PokemonApiClient implements PokemonApiClientInterface {
         this.client = WebClient.create(vertx);
     }
 
+    // For requesting the data to the Pokemon API
     @Override
     public Future<JSONObject> getPokemonData(String name) {
         Promise<JSONObject> promise = Promise.promise();
 
+        // Vertex client requests the specified pokemon to the API
         client.get(80, "pokeapi.co", "/api/v2/pokemon/" + name)
                 .send(ar -> {
                     if (ar.succeeded() && ar.result().statusCode() == 200) {
                         HttpResponse<?> response = ar.result();
+                        // Response body is saved as an String
                         String body = response.bodyAsString();
+                        // A JSON is created with the body
                         JSONObject json = new JSONObject(body);
+                        // parseData method is invoked to give proper format
                         promise.complete(parseData(json));
                     } else {
                         promise.fail("This pokemon does not exist or there was an error fetching the data.");
@@ -41,13 +45,17 @@ public class PokemonApiClient implements PokemonApiClientInterface {
         return promise.future();
     }
 
+    // For parsing the data from the JSON
     @Override
     public JSONObject parseData(JSONObject data) {
+        // New JSON for placing the parsed data
         JSONObject modifiedJson = new JSONObject();
 
+        // Name and Pokedex number
         modifiedJson.put("name", data.getString("name"));
         modifiedJson.put("pokedex_number", data.getInt("id"));
 
+        // New JSON to save the pokemon stats
         JSONObject statsJson = new JSONObject();
         JSONArray stats = data.getJSONArray("stats");
         for (int i = 0; i < stats.length(); i++) {
@@ -56,25 +64,27 @@ public class PokemonApiClient implements PokemonApiClientInterface {
             int baseStat = stat.getInt("base_stat");
             statsJson.put(statName, baseStat);
         }
-
+        // Add the stats JSON to the parsed JSON
         modifiedJson.put("stats", statsJson);
 
+        // New JSON to save the pokemon types
         JSONArray typesJson = new JSONArray();
         JSONArray types = data.getJSONArray("types");
         for (int i = 0; i < types.length(); i++) {
             String typeName = types.getJSONObject(i).getJSONObject("type").getString("name");
             typesJson.put(typeName);
         }
-
+        // Add the types JSON to the parsed JSON
         modifiedJson.put("types", typesJson);
 
+        // New JSON to save the pokemon abilities
         JSONArray abilitiesJson = new JSONArray();
         JSONArray abilities = data.getJSONArray("abilities");
         for (int i = 0; i < abilities.length(); i++) {
             String abilitieName = abilities.getJSONObject(i).getJSONObject("ability").getString("name");
             abilitiesJson.put(abilitieName);
         }
-
+        // Add the types JSON to the parsed JSON
         modifiedJson.put("abilities", abilitiesJson);
 
 

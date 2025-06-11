@@ -19,10 +19,12 @@ public class PokemonService implements PokemonServiceInterface {
 
     private JSONObject typeChart;
 
+    // Class constructor
     public PokemonService() {
         this.typeChart = loadTypeChart();
     }
 
+    // For loading the JSON file containing all Pokemon types (private, only used here)
     private JSONObject loadTypeChart() {
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream("resources/tableType.json");
@@ -36,31 +38,34 @@ public class PokemonService implements PokemonServiceInterface {
         }
     }
 
+    // Method to calculate the weak types for the pokemon
     @Override
     public String[] getWeakTypes(Pokemon p) {
+        // Map that saves the pokemon type and
         Map<String, Double> multipliers = new HashMap<>();
 
         for (String tipo : p.getTypes()) {
             JSONObject relaciones = typeChart.getJSONObject(tipo.toLowerCase());
 
+            // Double damage
             for (Object o : relaciones.getJSONArray("double_damage_from")) {
                 String t = (String) o;
                 multipliers.merge(t, 2.0, (a, b) -> a * b);
             }
-
+            // Half damage
             for (Object o : relaciones.getJSONArray("half_damage_from")) {
                 String t = (String) o;
                 multipliers.merge(t, 0.5, (a, b) -> a * b);
             }
-
+            // No damage
             for (Object o : relaciones.getJSONArray("no_damage_from")) {
                 String t = (String) o;
-                multipliers.put(t, 0.0); // inmunidad absoluta
+                multipliers.put(t, 0.0); // Absolute immunity
             }
         }
 
         return multipliers.entrySet().stream()
-                .filter(e -> e.getValue() > 1.0) // débil si recibe más daño de lo normal
+                .filter(e -> e.getValue() > 1.0) // Is weak if receives more damage than usual
                 .map(Map.Entry::getKey)
                 .toArray(String[]::new);
     }
