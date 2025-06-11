@@ -17,8 +17,8 @@ public class PokemonApiClient implements PokemonApiClientInterface {
     private final Vertx vertx;
     private final WebClient client;
 
-    public PokemonApiClient() {
-        this.vertx = Vertx.vertx();
+    public PokemonApiClient(Vertx vertx) {
+        this.vertx = vertx;
         this.client = WebClient.create(vertx);
     }
 

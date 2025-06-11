@@ -12,8 +12,10 @@ import io.vertx.sqlclient.RowSet;
 public class PokemonRepository implements PokemonRepositoryInterface {
 
     SqlClient client;
-    public PokemonRepository() {
-        this.client = PostgresClientProvider.createClient(Vertx.vertx());
+    Vertx vertx;
+    public PokemonRepository(Vertx vertx) {
+        this.vertx = vertx;
+        this.client = PostgresClientProvider.createClient(vertx);
     }
 
     @Override

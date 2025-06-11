@@ -2,17 +2,19 @@ package main.handler;
 
 import io.vertx.ext.web.RoutingContext;
 import main.api.PokemonApiClient;
+import main.api.PokemonApiClientInterface;
 import main.model.Pokemon;
+import main.repository.PokemonRepositoryInterface;
 import main.service.PokemonService;
 import main.repository.PokemonRepository;
-
+import main.service.PokemonServiceInterface;
 
 
 public class PokemonHandler implements PokemonHandlerInterface {
 
-    private final PokemonApiClient pokemonApiClient; // Inyecta el cliente para mejor testabilidad y reutilización
-    private final PokemonService pokemonService;
-    private final PokemonRepository pokemonRepository;
+    private final PokemonApiClientInterface pokemonApiClient; // Inyecta el cliente para mejor testabilidad y reutilización
+    private final PokemonServiceInterface pokemonService;
+    private final PokemonRepositoryInterface pokemonRepository;
 
     // Constructor para inyectar las dependencias
     public PokemonHandler(PokemonApiClient pokemonApiClient, PokemonService pokemonService, PokemonRepository pokemonRepository) {

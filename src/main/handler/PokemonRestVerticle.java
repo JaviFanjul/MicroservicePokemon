@@ -16,9 +16,9 @@ public class PokemonRestVerticle extends AbstractVerticle {
 
         // Definimos el endpoint REST.
         // Usaremos un "path parameter" para el nombre, por ejemplo: /saludar/Mundo
-        PokemonRepository repository = new PokemonRepository();
+        PokemonRepository repository = new PokemonRepository(vertx);
         PokemonService service = new PokemonService();
-        PokemonApiClient client = new PokemonApiClient();
+        PokemonApiClient client = new PokemonApiClient(vertx);
 
         router.get("/pokemon/:name").handler(new PokemonHandler(client,service, repository));
 

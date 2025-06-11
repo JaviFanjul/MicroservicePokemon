@@ -95,7 +95,6 @@ public class Pokemon {
         json.put("id", this.id);
         json.put("pokedex_number", this.numberPokedex);
         json.put("name", this.name);
-        json.put("speed", this.speed);
 
         // Atributos compuestos: ataque y defensa
         JSONObject stats = new JSONObject();
@@ -107,6 +106,8 @@ public class Pokemon {
             stats.put("defense", this.defense[0]);
             stats.put("special-defense", this.defense[1]);
         }
+        stats.put("speed", this.speed);
+
         json.put("stats", stats);
 
         // Tipos
