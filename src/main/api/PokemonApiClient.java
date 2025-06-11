@@ -13,33 +13,32 @@ import io.vertx.core.Promise;
 
 public class PokemonApiClient implements PokemonApiClientInterface {
 
-    //This class implements the PokemonApiClientInterface to interact with a Pokémon API.
+
     private final Vertx vertx;
     private final WebClient client;
 
     public PokemonApiClient() {
-        this.vertx = Vertx.vertx(); // Inicia el vertx
-        this.client = WebClient.create(vertx); // Crea el cliente web
-    } //Constructor
+        this.vertx = Vertx.vertx();
+        this.client = WebClient.create(vertx);
+    }
 
     @Override
     public Future<JSONObject> getPokemonData(String name) {
-        Promise<JSONObject> promise = Promise.promise();  // Creamos un promise para el resultado
+        Promise<JSONObject> promise = Promise.promise();
 
         client.get(80, "pokeapi.co", "/api/v2/pokemon/" + name)
                 .send(ar -> {
-                    if (ar.succeeded()) {
+                    if (ar.succeeded() && ar.result().statusCode() == 200) {
                         HttpResponse<?> response = ar.result();
                         String body = response.bodyAsString();
                         JSONObject json = new JSONObject(body);
-                        //System.out.println(parseData(json).toString());
-                        promise.complete(parseData(json));  // Si la petición es exitosa, completamos el promise
+                        promise.complete(parseData(json));
                     } else {
-                        promise.fail(ar.cause());  // Si la petición falla, fallamos el promise
+                        promise.fail(ar.cause());
                     }
                 });
 
-        return promise.future();  // Retornamos el futuro asociado al promise
+        return promise.future();
     }
 
     @Override
