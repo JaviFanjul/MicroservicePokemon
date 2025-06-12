@@ -1,12 +1,10 @@
 package main.api;
-import main.model.Pokemon;
-import netscape.javascript.JSObject;
+
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.client.WebClient;
-import io.vertx.ext.web.client.HttpResponse;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 
