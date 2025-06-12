@@ -1,12 +1,10 @@
 package main.handler;
 
 import io.vertx.ext.web.RoutingContext;
-import main.api.PokemonApiClient;
+
 import main.api.PokemonApiClientInterface;
 import main.model.Pokemon;
 import main.repository.PokemonRepositoryInterface;
-import main.service.PokemonService;
-import main.repository.PokemonRepository;
 import main.service.PokemonServiceInterface;
 
 
