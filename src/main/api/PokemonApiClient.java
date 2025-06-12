@@ -13,11 +13,9 @@ import io.vertx.core.Promise;
 
 public class PokemonApiClient implements PokemonApiClientInterface {
 
-    private final Vertx vertx;
     private final WebClient client;
 
     public PokemonApiClient(Vertx vertx) {
-        this.vertx = vertx;
         this.client = WebClient.create(vertx);
     }
 
@@ -29,16 +27,19 @@ public class PokemonApiClient implements PokemonApiClientInterface {
         // Vertex client requests the specified pokemon to the API
         client.get(80, "pokeapi.co", "/api/v2/pokemon/" + name)
                 .send(ar -> {
-                    if (ar.succeeded() && ar.result().statusCode() == 200) {
-                        HttpResponse<?> response = ar.result();
-                        // Response body is saved as an String
-                        String body = response.bodyAsString();
+                    if (ar.result().statusCode() == 200) {
+
+                        String data = ar.result().bodyAsString();
+
                         // A JSON is created with the body
-                        JSONObject json = new JSONObject(body);
+                        JSONObject json = new JSONObject(data);
+
                         // parseData method is invoked to give proper format
                         promise.complete(parseData(json));
+
                     } else {
-                        promise.fail("This pokemon does not exist or there was an error fetching the data.");
+                        String errorMessage = ar.result().bodyAsString();
+                        promise.fail(errorMessage);
                     }
                 });
 
@@ -48,6 +49,7 @@ public class PokemonApiClient implements PokemonApiClientInterface {
     // For parsing the data from the JSON
     @Override
     public JSONObject parseData(JSONObject data) {
+
         // New JSON for placing the parsed data
         JSONObject modifiedJson = new JSONObject();
 
