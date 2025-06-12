@@ -25,9 +25,10 @@ maven_install(
         "io.vertx:vertx-core:4.5.15",
         "io.vertx:vertx-web:4.5.15",
         "io.vertx:vertx-web-client:4.5.15",
+        "io.vertx:vertx-pg-client:4.5.15",
+        "io.vertx:vertx-sql-client:4.5.15",
         "org.json:json:20250517",
-        "org.junit.jupiter:junit-jupiter-api:5.13.0",
-        "org.postgresql:postgresql:42.7.2",
+        "com.ongres.scram:client:2.1",
     ],
     repositories = [
         "https://maven.google.com",
