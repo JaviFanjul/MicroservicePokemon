@@ -37,15 +37,12 @@ public class PokemonHandler implements PokemonHandlerInterface {
                     pokemonRepository.savePokemon(pokemon)
                             .onSuccess(id -> {
                                 pokemon.setId(id);
-                                System.out.println("Pokémon saved successfully! ID: " + id);
-                                System.out.println(pokemon.getData().toString(4));
                                 context.response()
                                         .setStatusCode(201)
                                         .putHeader("Content-Type", "application/json")
                                         .end(pokemon.getData().toString(4));
                             })
                             .onFailure(saveFailure -> {
-                                System.err.println("Error saving Pokémon: " + saveFailure.getMessage());
                                 context.response()
                                         .setStatusCode(500) // Internal Server Error
                                         .putHeader("Content-Type", "text/plain")

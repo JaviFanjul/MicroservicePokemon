@@ -7,7 +7,11 @@ import main.api.PokemonApiClient;
 import main.repository.PokemonRepository;
 import main.service.PokemonService;
 
+import java.util.logging.Logger;
+
 public class PokemonRestVerticle extends AbstractVerticle {
+
+    private static final Logger logger = Logger.getLogger(PokemonRestVerticle.class.getName());
 
     @Override
     public void start(Promise<Void> startPromise) {
@@ -28,10 +32,10 @@ public class PokemonRestVerticle extends AbstractVerticle {
                 .listen(8080, http -> {
                     if (http.succeeded()) {
                         startPromise.complete();
-                        System.out.println("HTTP server initialized at port 8080...");
+                        logger.info("Server started on port 8080");
                     } else {
                         startPromise.fail(http.cause());
-                        System.err.println("The server could not be initialized: " + http.cause().getMessage());
+                        logger.severe("Failed to start server: " + http.cause().getMessage());
                     }
                 });
     }

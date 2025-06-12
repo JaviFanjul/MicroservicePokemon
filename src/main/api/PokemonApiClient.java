@@ -8,10 +8,13 @@ import io.vertx.ext.web.client.WebClient;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 
+import java.util.logging.Logger;
+
 
 public class PokemonApiClient implements PokemonApiClientInterface {
 
     private final WebClient client;
+    private static final Logger logger = Logger.getLogger(PokemonApiClient.class.getName());
 
     public PokemonApiClient(Vertx vertx) {
         this.client = WebClient.create(vertx);
@@ -34,10 +37,12 @@ public class PokemonApiClient implements PokemonApiClientInterface {
 
                         // parseData method is invoked to give proper format
                         promise.complete(parseData(json));
+                        logger.info("Pokemon data retrieved successfully for: " + name);
 
                     } else {
                         String errorMessage = ar.result().bodyAsString();
                         promise.fail(errorMessage);
+                        logger.severe("Failed to retrieve Pokemon data for: " + name + " Error: " + errorMessage);
                     }
                 });
 

@@ -9,10 +9,13 @@ import io.vertx.sqlclient.Tuple;
 import io.vertx.sqlclient.Row;
 import io.vertx.sqlclient.RowSet;
 
+import java.util.logging.Logger;
+
 public class PokemonRepository implements PokemonRepositoryInterface {
 
     SqlClient client;
     Vertx vertx;
+    private static final Logger logger = Logger.getLogger(PokemonRepository.class.getName());
 
     // Class constructor
     public PokemonRepository(Vertx vertx) {
@@ -39,8 +42,10 @@ public class PokemonRepository implements PokemonRepositoryInterface {
                         Row row = rows.iterator().next();
                         int id = row.getInteger("id"); // 'id' is now present in the Row
                         promise.complete(id);
+                        logger.info("Pokemon data saved successfully with ID " + id +" for: " + p.getName()) ;
                     } else {
                         promise.fail("No ID returned from INSERT operation.");
+                        logger.severe("No ID returned from INSERT operation.");
                     }
                 })
                 .onFailure(promise::fail);
