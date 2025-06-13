@@ -15,4 +15,5 @@ java_binary(
         "//src/main/repository:pokerepository",
         "//src/main/handler:pokehandler",
     ],
+    data = ["//:env_file"],
     )

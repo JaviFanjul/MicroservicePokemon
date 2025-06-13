@@ -29,6 +29,7 @@ maven_install(
         "io.vertx:vertx-sql-client:4.5.15",
         "org.json:json:20250517",
         "com.ongres.scram:client:2.1",
+        "io.github.cdimascio:dotenv-java:3.2.0",
 
     ],
     repositories = [

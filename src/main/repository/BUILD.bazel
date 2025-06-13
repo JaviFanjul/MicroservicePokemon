@@ -10,6 +10,8 @@ java_library(
         "@maven//:io_vertx_vertx_pg_client_4_5_15",
         "@maven//:io_vertx_vertx_sql_client_4_5_15",
         "@maven//:com_ongres_scram_client_2_1",
+        "@maven//:io_github_cdimascio_dotenv_java_3_2_0",
+
 
 
 
