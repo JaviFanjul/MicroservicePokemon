@@ -40,15 +40,16 @@ public class PokemonHandler implements PokemonHandlerInterface {
                                 context.response()
                                         .setStatusCode(201)
                                         .putHeader("Content-Type", "application/json")
-                                        .end(pokemon.getData().toString(4));
+                                        .end(pokemon.getData().toString(2));
                             })
                             .onFailure(saveFailure -> {
                                 context.response()
                                         .setStatusCode(500) // Internal Server Error
                                         .putHeader("Content-Type", "text/plain")
-                                        .end("There was an error on saving the Pokémon: " + saveFailure.getMessage());
+                                        .end(saveFailure.getMessage() +  '\n' + pokemon.getData().toString(2));
                             }); // DB failure
                 })
+
                 .onFailure(apiFailure -> {
                     context.response()
                             .setStatusCode(500) // Internal Server Error

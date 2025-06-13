@@ -48,7 +48,12 @@ public class PokemonRepository implements PokemonRepositoryInterface {
                         logger.severe("No ID returned from INSERT operation.");
                     }
                 })
-                .onFailure(promise::fail);
+                .onFailure(dbFailure -> {
+                    promise.fail("Database error: " + dbFailure.getMessage());
+                    logger.severe("Database error: " + dbFailure.getMessage());
+                }); // API failure
+
+
 
         return promise.future();
     }
